@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Cart from './components/Cart';
 import Filter from './components/Filter';
 import Products from './components/Products';
@@ -12,7 +12,7 @@ class App extends React.Component {
       size: '',
       sort: '',
       category: '',
-      cartItems: [],
+      cartItems: JSON.parse(localStorage.getItem('cartItems')) ? JSON.parse(localStorage.getItem('cartItems')) : []
     }
   }
 
@@ -20,7 +20,8 @@ class App extends React.Component {
     const cartItems = this.state.cartItems.slice()
     this.setState({
       cartItems: cartItems.filter(item => item._id !== product._id)
-    })
+    });
+    localStorage.setItem('cartItems', JSON.stringify(cartItems.filter(item => item._id !== product._id)));
   }
 
   addToCart = (product) => {
@@ -36,7 +37,9 @@ class App extends React.Component {
     if (!alreadyInCart) {
       cartItems.push({ ...product, count: 1 });
     }
-    this.setState({ cartItems: cartItems })
+    this.setState({ cartItems: cartItems });
+
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
   }
   sortProducts = (event) => {
     const sort = event.target.value;
@@ -88,6 +91,10 @@ class App extends React.Component {
     }
   }
 
+  createOrder = (order) => {
+    alert("Order should be save for " + order.name)
+  }
+
   render() {
     return (
       <div className="grid-container">
@@ -113,6 +120,7 @@ class App extends React.Component {
             <div className="sidebar">
               <Cart cartItems={this.state.cartItems}
                 removeFromCart={this.removeFromCart}
+                createOrder={this.createOrder}
               />
             </div>
           </div>
