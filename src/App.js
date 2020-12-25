@@ -3,9 +3,10 @@ import Cart from './components/Cart';
 import Filter from './components/Filter';
 import Products from './components/Products';
 import data from './data.json';
-import ScrollToTop from "react-scroll-to-top";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons'
+import { store } from './redux/store';
+import { Provider } from 'react-redux';
 
 class App extends React.Component {
   constructor() {
@@ -100,45 +101,45 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="grid-container">
-        <ScrollToTop smooth color='#ffffff' fontWeight='bold' />
-        <header>
-          <a href="/">Shopping Cart</a>
-          <div className="cartIcon">
-            <FontAwesomeIcon icon={faCartPlus} className="icon" /><sup>{this.state.cartItems.length}</sup>
-          </div>
-        </header>
-        <main>
-          <div className="content">
-            <div className="main">
-              <Filter count={this.state.products.length}
-                size={this.state.size}
-                sort={this.state.sort}
-                category={this.state.category}
-                filterProducts={this.filterProducts}
-                sortProducts={this.sortProducts}
-                categoryProducts={this.categoryProducts}
-              />
-              <div className="productSection">
-                <Products
-                  products={this.state.products}
-                  addToCart={this.addToCart}
+      <Provider store={store}>
+        <div className="grid-container">
+          <header>
+            <a href="/">Shopping Cart</a>
+            <div className="cartIcon">
+              <FontAwesomeIcon icon={faCartPlus} className="icon" /><sup>{this.state.cartItems.length}</sup>
+            </div>
+          </header>
+          <main>
+            <div className="content">
+              <div className="main">
+                <Filter count={this.state.products.length}
+                  size={this.state.size}
+                  sort={this.state.sort}
+                  category={this.state.category}
+                  filterProducts={this.filterProducts}
+                  sortProducts={this.sortProducts}
+                  categoryProducts={this.categoryProducts}
+                />
+                <div className="productSection">
+                  <Products
+                    addToCart={this.addToCart}
+                  />
+                </div>
+
+              </div>
+              <div className="sidebar">
+                <Cart cartItems={this.state.cartItems}
+                  removeFromCart={this.removeFromCart}
+                  createOrder={this.createOrder}
                 />
               </div>
-
             </div>
-            <div className="sidebar">
-              <Cart cartItems={this.state.cartItems}
-                removeFromCart={this.removeFromCart}
-                createOrder={this.createOrder}
-              />
-            </div>
-          </div>
-        </main>
-        <footer>
-          All right it reserved
+          </main>
+          <footer>
+            All right it reserved
         </footer>
-      </div>
+        </div>
+      </Provider>
     );
   }
 
