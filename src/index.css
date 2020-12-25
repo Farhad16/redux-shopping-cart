@@ -5,10 +5,18 @@ html {
   box-sizing: border-box;
 }
 
-body,
-#root {
+body {
   height: 100vh;
   margin: 0;
+}
+
+.styles_scroll-to-top__2A70v {
+  background: #a3a3a3 !important;
+  padding: 15px;
+  width: 50px !important;
+  height: 50px !important;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 body,
@@ -41,16 +49,36 @@ a:hover {
 
 header {
   grid-area: header;
-  background-color: #203040;
-  color: #ffffff;
+  background-color: #058aa1;
   display: flex;
   align-items: center;
-  padding: 0.5rem;
+  padding: 0.5rem 2rem;
+  font-family: Roboto;
+  font-size: 2rem;
+  justify-content: space-between;
 }
 
+
 header a {
-  color: #ffffff;
+  color: #ffbb00;
   text-decoration: none;
+}
+
+.cartIcon {
+  margin-right: 3rem;
+}
+
+.cartIcon sup {
+  position: absolute;
+  top: .5rem;
+  font-weight: bold;
+  color: #ffffff;
+  padding-left: .5rem;
+}
+
+.icon {
+  color: #f0c040;
+  font-size: 2.5rem;
 }
 
 main {
@@ -59,7 +87,7 @@ main {
 
 footer {
   grid-area: footer;
-  background-color: #203040;
+  background-color: #058aa1;
   color: #ffffff;
   display: flex;
   justify-content: center;
@@ -86,8 +114,9 @@ footer {
   justify-content: center;
   align-items: center;
   padding: 0;
-  margin: 0;
+  margin: 1rem;
   list-style-type: none;
+  background: #e9e9e9;
 }
 
 .products li {
@@ -106,6 +135,8 @@ footer {
 .product img {
   max-width: 37rem;
   max-height: 37rem;
+  width: 30rem;
+  height: 37rem;
 }
 
 .product-price {
@@ -141,6 +172,7 @@ footer {
 
 /* Filter */
 .filter {
+  background: #e9e9e9;
   display: flex;
   justify-content: space-between;
   padding: 1rem;
@@ -158,6 +190,8 @@ footer {
   padding: 1rem;
   margin: 1rem;
   display: flex;
+  background: #e9e9e9;
+  justify-content: center;
 }
 
 .cart-header {

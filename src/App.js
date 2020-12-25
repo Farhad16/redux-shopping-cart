@@ -3,6 +3,9 @@ import Cart from './components/Cart';
 import Filter from './components/Filter';
 import Products from './components/Products';
 import data from './data.json';
+import ScrollToTop from "react-scroll-to-top";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCartPlus } from '@fortawesome/free-solid-svg-icons'
 
 class App extends React.Component {
   constructor() {
@@ -98,8 +101,12 @@ class App extends React.Component {
   render() {
     return (
       <div className="grid-container">
+        <ScrollToTop smooth color='#ffffff' fontWeight='bold' />
         <header>
           <a href="/">Shopping Cart</a>
+          <div className="cartIcon">
+            <FontAwesomeIcon icon={faCartPlus} className="icon" /><sup>{this.state.cartItems.length}</sup>
+          </div>
         </header>
         <main>
           <div className="content">
@@ -112,10 +119,13 @@ class App extends React.Component {
                 sortProducts={this.sortProducts}
                 categoryProducts={this.categoryProducts}
               />
-              <Products
-                products={this.state.products}
-                addToCart={this.addToCart}
-              />
+              <div className="productSection">
+                <Products
+                  products={this.state.products}
+                  addToCart={this.addToCart}
+                />
+              </div>
+
             </div>
             <div className="sidebar">
               <Cart cartItems={this.state.cartItems}
