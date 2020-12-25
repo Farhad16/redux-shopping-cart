@@ -33,7 +33,7 @@ export const fetchProducts = () => {
   return (dispatch) => {
     dispatch(fetchProductsRequest())
     axios
-      .get('http://localhost:5000/products')
+      .get('https://pacific-peak-45264.herokuapp.com/products')
       .then(response => {
         const users = response.data
         dispatch(fetchProductsSuccess(users))
