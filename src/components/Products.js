@@ -28,7 +28,7 @@ const Products = ({ productData, addToCart, fetchProducts }) => {
         <Fade left cascade>
           <ul className="products">
             {
-              productData.products.map((product) => (
+              productData.map((product) => (
                 <li key={product._id}>
                   <div className="product">
                     <a href={"#" + product._id} onClick={() => { openModal(product) }}>
@@ -91,7 +91,7 @@ const Products = ({ productData, addToCart, fetchProducts }) => {
 
 const mapStateToProps = state => {
   return {
-    productData: state.products
+    productData: state.products.filteredProducts,
   }
 }
 
