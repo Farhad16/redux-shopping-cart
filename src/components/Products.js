@@ -5,8 +5,9 @@ import Modal from 'react-modal';
 import Zoom from 'react-reveal/Zoom';
 import { fetchProducts } from '../redux/product/productActions';
 import { connect } from 'react-redux'
+import { addToCart } from '../redux/cart/cartActions';
 
-const Products = ({ productData, addToCart, fetchProducts }) => {
+const Products = ({ loading, productData, addToCart, fetchProducts }) => {
 
   const [product, setProduct] = useState(null)
 
@@ -25,23 +26,29 @@ const Products = ({ productData, addToCart, fetchProducts }) => {
   return (
     <div>
       <div>
-        <Fade left cascade>
+        <Fade bottom cascade>
           <ul className="products">
             {
-              productData.map((product) => (
-                <li key={product._id}>
-                  <div className="product">
-                    <a href={"#" + product._id} onClick={() => { openModal(product) }}>
-                      <img src={product.image} alt={product.title} />
-                      <p>{product.title}</p>
-                    </a>
-                    <div className="product-price">
-                      <div>{formatCurrency(product.price)}</div>
-                      <button onClick={() => addToCart(product)} className="button primary">Add to cart</button>
-                    </div>
-                  </div>
-                </li>
-              ))
+              loading ? <div className="" role="status">
+                Loading...
+                <span className="spinner-border"></span>
+              </div>
+                : (
+                  productData.map((product) => (
+                    <li key={product._id}>
+                      <div className="product">
+                        <a href={"#" + product._id} onClick={() => { openModal(product) }}>
+                          <img src={product.image} alt={product.title} />
+                          <p>{product.title}</p>
+                        </a>
+                        <div className="product-price">
+                          <div>{formatCurrency(product.price)}</div>
+                          <button onClick={() => addToCart(product)} className="button primary">Add to cart</button>
+                        </div>
+                      </div>
+                    </li>
+                  ))
+                )
             }
           </ul>
         </Fade>
@@ -91,13 +98,15 @@ const Products = ({ productData, addToCart, fetchProducts }) => {
 
 const mapStateToProps = state => {
   return {
+    loading: state.products.loading,
     productData: state.products.filteredProducts,
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchProducts: () => dispatch(fetchProducts())
+    fetchProducts: () => dispatch(fetchProducts()),
+    addToCart: (product) => dispatch(addToCart(product))
   }
 }
 
