@@ -45,7 +45,7 @@ const Filter = (
               )
             }
           >
-            <option value={category}>ALL</option>
+            <option value="ALL">ALL</option>
             <option value="female">Female</option>
             <option value="gent">Male</option>
           </select>
@@ -74,7 +74,7 @@ const Filter = (
               filterProductsBySize(productData.products, e.target.value)
             }
           >
-            <option value="">ALL</option>
+            <option value="ALL">ALL</option>
             <option value="XS">XS</option>
             <option value="S">S</option>
             <option value="M">M</option>
